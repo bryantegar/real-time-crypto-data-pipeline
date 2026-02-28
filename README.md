@@ -1,47 +1,113 @@
-# Real-time Crypto Streaming Platform
+# Real-Time Crypto Data Engineering Platform
 
-This project is a real-time data pipeline using:
-- Binance WebSocket (crypto ticker stream)
-- Apache Kafka for streaming pipeline
-- PostgreSQL for persistent storage
-- Streamlit Dashboard for live monitoring
+## Overview
+
+This project is a production-style real-time data pipeline that ingests cryptocurrency price streams and processes them using distributed streaming architecture.
+
+It simulates a real-world fintech data engineering system demonstrating scalable ingestion, streaming computation, persistent storage, and live visualization.
+
+---
 
 ## Architecture
-WebSocket → Kafka → PostgreSQL → Dashboard
+
+Pipeline Flow:
+
+```
+Binance WebSocket → Kafka → Processing → Storage → Dashboard
+```
+
+---
 
 ## Features
-- Real-time BTCUSDT price ingestion
-- Structured storage into database (id, symbol, price, timestamp)
-- Live dashboard updates every 3 seconds
-- Fully containerized using Docker
+
+* Real-time crypto price ingestion (BTCUSDT stream)
+* Distributed streaming pipeline using Kafka
+* Structured storage into PostgreSQL
+* Live dashboard updates every 3 seconds
+* Modular architecture design
+* Containerized deployment with Docker
+
+---
 
 ## Tech Stack
-| Component | Technology |
-|----------|------------|
-| Data Source | Binance WebSocket API |
-| Streaming | Kafka |
-| Storage | PostgreSQL |
-| Dashboard | Streamlit |
-| Deployment | Docker Compose |
-| Language | Python |
 
-## Dashboard Preview
-(Screenshot here)
+| Layer         | Technology             |
+| ------------- | ---------------------- |
+| Data Source   | Binance WebSocket API  |
+| Streaming     | Apache Kafka           |
+| Processing    | Python Streaming Logic |
+| Storage       | PostgreSQL             |
+| Visualization | Streamlit              |
+| Deployment    | Docker Compose         |
+| Language      | Python                 |
+
+---
+
+## Project Structure
+
+```
+src/
+ ┣ collectors
+ ┣ processing
+ ┣ storage
+ ┣ dashboard
+ ┗ utils
+```
+
+---
 
 ## How to Run
-```sh
-# Start Docker services
+
+Start services
+
+```
 docker compose up -d
+```
 
-# Activate virtual environment
+Activate environment
+
+```
 venv\Scripts\activate
+```
 
-# Run Kafka producer
+Run producer
+
+```
 python src\producer_crypto.py
+```
 
-# Run Kafka → DB consumer
+Run consumer
+
+```
 python src\consumer_db.py
+```
 
-# Run dashboard
+Run dashboard
+
+```
 streamlit run src\dashboard_realtime.py
+```
 
+---
+
+## Engineering Concepts Demonstrated
+
+* Real-time stream processing
+* Event-driven architecture
+* Distributed messaging systems
+* Data pipeline orchestration
+* Containerized deployment
+* Scalable system design
+
+---
+
+## Use Case
+
+This system simulates how financial platforms monitor live market data streams for analytics, alerting, and trading insights.
+
+---
+
+## Author
+
+**Bryan Tegar**
+Aspiring Data Engineer
