@@ -1,0 +1,44 @@
+<script>
+    const logBox = document.getElementById("log");
+    const statusBox = document.getElementById("status");
+
+    function addLog(msg) {
+        logBox.innerHTML = msg + "<br>" + logBox.innerHTML;
+    }
+
+    const ws = new WebSocket("ws://localhost:8765");
+
+    ws.onopen = () => {
+        statusBox.innerText = "🟢 Connected to WebSocket Backend!";
+        console.log("Connected!");
+    };
+
+    ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        console.log("📩 Data:", data);
+
+        if (data.type === "price") {
+            addLog(
+                `[${new Date().toLocaleTimeString()}] PRICE → ${data.symbol} : ${data.price}`
+            );
+        }
+
+        if (data.type === "ohlc") {
+            statusBox.innerText =
+                `Last OHLC → ${data.symbol} | O:${data.open} H:${data.high} L:${data.low} C:${data.close}`;
+
+            addLog(
+                `[${new Date().toLocaleTimeString()}] ${data.symbol} → ` +
+                `O:${data.open} | H:${data.high} | L:${data.low} | C:${data.close}`
+            );
+        }
+    };
+
+    ws.onerror = () => {
+        statusBox.innerText = "⚠ WebSocket Error!";
+    };
+
+    ws.onclose = () => {
+        statusBox.innerText = "🔴 WebSocket Disconnected!";
+    };
+</script>
